@@ -1,0 +1,4 @@
+name: MPS_AE_Dashboard
+dependencies:
+  browser: any
+  http_server: any

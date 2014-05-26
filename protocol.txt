@@ -1,0 +1,80 @@
+Kommunikation über JSON.
+Der Monitor kennt immer den genauen Zustand jeder MPS Instanz.
+
+
+Wenn jmd. das Dashboard-GUI öffnet, schickt er an den Monitor:
+{
+	"request": "getCompleteList"
+}
+Erwartete Antwort:
+{
+	"response": "completeList",
+	"data": [
+		{
+			"name": "localhost:1234",
+			"status": "on",
+			"uptime": 100,
+			"requests": 3219,
+			"systemLoad": 5
+		},
+		{
+            "name": "localhost:4311",
+            "status": "off",
+            "uptime": 20,
+            "requests": 518,
+            "systemLoad": 0
+        },
+	]
+}
+uptime und systemLoad in Prozent als Zahl.
+
+
+Sonstige erwartete Nachrichten vom Monitor:
+Bei neuer Instanz:
+{
+	"response": "add",
+	"key": "localhost:5321",
+	"data": {
+		"status": "on",
+		"uptime": 100,
+		"requests": 0,
+		"systemLoad": 0
+	}
+}
+Bei einer Zustandsänderung einer Instanz:
+{
+	"response": "update",
+	"key": "localhost:1234",
+	"data": {
+		"uptime": 66
+	}
+}
+Mehrere Werte in "data" sind möglich.
+Wenn eine Instanz entfernt wird:
+{
+	"response": "remove",
+	"key": "localhost:2222"
+}
+
+
+Das Dashboard-GUI schickt folgende Requests:
+Neue Instanz hinzufügen:
+{
+	"request": "add",
+	"key": "localhost:6212"
+}
+Vorhandene Instanz starten:
+{
+	"request": "start",
+	"key": "localhost:5431"
+}
+Instanz stoppen:
+{
+	"request": "stop",
+	"key": "localhost:7819"
+}
+Instanz entfernen:
+{
+	"request": "remove",
+	"key": "localhost:3333"
+}

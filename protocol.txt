@@ -18,12 +18,12 @@ Erwartete Antwort:
 			"systemLoad": 5
 		},
 		{
-            "name": "localhost:4311",
-            "status": "off",
-            "uptime": 20,
-            "requests": 518,
-            "systemLoad": 0
-        },
+			"name": "localhost:4311",
+			"status": "off",
+			"uptime": 20,
+			"requests": 518,
+			"systemLoad": 0
+		},
 	]
 }
 uptime und systemLoad in Prozent als Zahl.

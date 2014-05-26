@@ -23,7 +23,7 @@ Erwartete Antwort:
 			"uptime": 20,
 			"requests": 518,
 			"systemLoad": 0
-		},
+		}
 	]
 }
 uptime und systemLoad in Prozent als Zahl.
@@ -50,6 +50,7 @@ Bei einer Zustandsänderung einer Instanz:
 	}
 }
 Mehrere Werte in "data" sind möglich.
+
 Wenn eine Instanz entfernt wird:
 {
 	"response": "remove",

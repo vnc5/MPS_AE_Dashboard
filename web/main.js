@@ -2,7 +2,8 @@ var table = document.getElementById('status-tbody');
 var rowTemplate = document.getElementById('row-template');
 var statusUrls = {
 	on: 'status',
-	off: 'status-away'
+	off: 'status-offline',
+	stopped: 'status-away'
 };
 var ws = new WebSocket('ws://localhost');
 

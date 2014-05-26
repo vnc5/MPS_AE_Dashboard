@@ -1,4 +1,33 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+.status-table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+.spacer {
+    margin-top: 60px;
+}
+
+.status-table th:nth-child(1) {
+    width: 5%;
+}
+.status-table th:nth-child(2) {
+    width: 20%;
+}
+.status-table th:nth-child(3) {
+    width: 15%;
+}
+.status-table th:nth-child(4) {
+    width: 20%;
+}
+.status-table th:nth-child(5) {
+    width: 15%;
+}
+.status-table th:nth-child(6) {
+    width: 25%;
 }

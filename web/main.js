@@ -8,15 +8,18 @@ var ws = new WebSocket('ws://localhost');
 
 ws.onopen = function () {
 	ws.send(JSON.stringify({
-		request: 'getData'
+		request: 'getCompleteList'
 	}));
 };
 
 ws.onmessage = function (e) {
 	var json = JSON.parse(e.data);
 	switch (json.response) {
-		case 'data':
-
+		case 'completeList':
+			var length = json.data.length;
+			for (var i = 0; i < length; i++) {
+				addRow(table, json.data[i].name, json.data[i]);
+			}
 			break;
 		case 'add':
 			addRow(table, json.key, json.data);

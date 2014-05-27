@@ -9,6 +9,10 @@
     width: 100%;
 }
 
+.status-table td {
+    vertical-align: middle !important;
+}
+
 .spacer {
     margin-top: 60px;
 }

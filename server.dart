@@ -24,23 +24,29 @@ void main() {
 			};
 		});
 
-//		Socket.connect('localhost', 2000).then((Socket socket) {
-//			monitor = socket;
-//			socket
-//				.map((str) => JSON.decode(str))
-//				.listen((Map json) {
+		Socket.connect('localhost', 1338).then((Socket socket) {
+			monitor = socket;
+			socket
+				.transform(UTF8.decoder)
+				.transform(new LineSplitter())
+				.listen((line) {
+					if (clients.isNotEmpty) {
+						clients.first.add(line);
+					}
+					// Concurrent modification during iteration
+					// WHYYYYY?
 //					clients.forEach((WebSocket client) {
 //						client.add(json);
 //					});
-//				});
-//		});
+				});
+		});
 	});
 }
 
 void handleWebSocket(WebSocket socket) {
 	clients.add(socket);
 	socket.listen((str) {
-//		monitor.add(str);
+		monitor.write(str + '\n');
 		print(str);
 	}, onDone: () {
 		clients.remove(socket);

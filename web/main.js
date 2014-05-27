@@ -15,6 +15,7 @@ ws.onopen = function () {
 
 ws.onmessage = function (e) {
 	var json = JSON.parse(e.data);
+	console.log(json);
 	switch (json.response) {
 		case 'completeList':
             clearRows(table);
@@ -44,14 +45,15 @@ function clearRows(tbody) {
 
 function addRow(tbody, name, json) {
 	var row = rowTemplate.cloneNode(true);
+	row.removeAttribute('style');
 	row.cells[1].textContent = name;
-	tbody.insertRow(row);
+	tbody.appendChild(row);
 	updateRow(tbody, name, json);
 }
 
 function removeRow(tbody, name) {
 	var rowCount = tbody.rows.length;
-	for (var i = 1; i < rowCount; i++) {
+	for (var i = 0; i < rowCount; i++) {
 		var row = tbody.rows[i];
 		if (row.cells[1].textContent == name) {
 			tbody.deleteRow(i);
@@ -62,20 +64,20 @@ function removeRow(tbody, name) {
 
 function updateRow(tbody, name, json) {
 	var rowCount = tbody.rows.length;
-	for (var i = 1; i < rowCount; i++) {
+	for (var i = 0; i < rowCount; i++) {
 		var row = tbody.rows[i];
 		if (row.cells[1].textContent == name) {
-			if (json.status) {
+			if ('status' in json) {
 				row.cells[0].children[0].src = 'img/' + statusUrls[json.status] + '.png';
 			}
-			if (json.uptime) {
-				row.cells[2].textContent = json.uptime + "%";
+			if ('uptime' in json) {
+				row.cells[2].textContent = json.uptime + '%';
 			}
-			if (json.requests) {
+			if ('requests' in json) {
 				row.cells[3].textContent = json.requests;
 			}
-			if (json.systemLoad) {
-				row.cells[4].textContent = json.systemLoad + "%";
+			if ('systemLoad' in json) {
+				row.cells[4].textContent = json.systemLoad + '%';
 			}
 			return;
 		}
@@ -83,7 +85,7 @@ function updateRow(tbody, name, json) {
 }
 
 function buttonClick(button, cmd) {
-	var name = button.parentNode.parentNode.cells[2].textContent;
+	var name = button.parentNode.parentNode.cells[1].textContent;
 	ws.send(JSON.stringify({
 		request: cmd,
 		key: name

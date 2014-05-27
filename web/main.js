@@ -17,6 +17,7 @@ ws.onmessage = function (e) {
 	var json = JSON.parse(e.data);
 	switch (json.response) {
 		case 'completeList':
+            clearRows(table);
 			var length = json.data.length;
 			for (var i = 0; i < length; i++) {
 				addRow(table, json.data[i].name, json.data[i]);
@@ -34,6 +35,12 @@ ws.onmessage = function (e) {
 	}
 };
 
+
+function clearRows(tbody) {
+    while (tbody.rows.length > 0) {
+        tbody.deleteRow(0);
+    }
+}
 
 function addRow(tbody, name, json) {
 	var row = rowTemplate.cloneNode(true);

@@ -5,7 +5,7 @@ var statusUrls = {
 	off: 'status-offline',
 	stopped: 'status-away'
 };
-var ws = new WebSocket('ws://localhost');
+var ws = new WebSocket('ws://' + location.host);
 
 ws.onopen = function () {
 	ws.send(JSON.stringify({
